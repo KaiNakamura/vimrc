@@ -172,6 +172,9 @@ set rtp+=~/.vim/plugged/nerdtree
 autocmd vimenter * NERDTree
 autocmd BufWinEnter * NERDTreeMirror
 
+" Show bookmarks on startup
+let NERDTreeShowBookmarks=1
+
 " Hide "Press ? for help"
 let NERDTreeMinimalUI = 1
 
