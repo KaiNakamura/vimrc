@@ -2,6 +2,7 @@
 " TODO
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocomplete adds dummy placeholder variables
+" Hotkey for :Explore
 " Shift + Backspace inserts "Î"
 " Auto compete window creates miscolored spots
 " Auto java import statements
@@ -27,7 +28,7 @@ Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Coc
+" Conquer of Completion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " To edit coc-settings.json :CocConfig
 " To edit snippets use :CocCommand snippets.editSnippets
@@ -188,41 +189,16 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Color Scheme
+" File Exploration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme default
+" Hide .swp files
+let g:netrw_list_hide = '.*\.swp$'
+" Hide menu
+let netrw_banner = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General
+" Copy and Paste
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn syntax highlighting on
-filetype plugin on
-syntax on
-noh
-
-" Get rid of 'Hit ENTER to continue'
-set shortmess+=a
-
-" Show line numbers
-set nu
-
-" Indentaion
-set tabstop=4
-set shiftwidth=4
-
-set smartindent
-
-" Backspace deletes lines
-set backspace=indent,eol,start
-
-" Lets cursor go one space past the end of the line
-set virtualedit=onemore
-
-" Stops creation of backup files (.un~, .file~)
-set noundofile
-set nobackup
-set nowritebackup
-
 " Changes copy and paste to use the system clipboard
 set clipboard=unnamedplus,unnamed
 
@@ -231,6 +207,9 @@ nnoremap d "_d
 xnoremap d "_d
 xnoremap p "_dP
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Windows and Tabs
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Makes new split screens appear below or to the right the current screen
 set splitbelow
 set splitright
@@ -261,6 +240,39 @@ nnoremap <M-8> 8gt
 nnoremap <M-9> 9gt
 nnoremap <M-0> :tablast<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Indentation
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set tabstop=4
+set shiftwidth=4
+
+set smartindent
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Appearance and Behaviour
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn syntax highlighting on
+filetype plugin on
+syntax on
+noh
+
+" Get rid of 'Hit ENTER to continue'
+set shortmess+=a
+
+" Show line numbers
+set nu
+
+" Backspace deletes lines
+set backspace=indent,eol,start
+
+" Lets cursor go one space past the end of the line
+set virtualedit=onemore
+
+" Stops creation of backup files (.un~, .file~)
+set noundofile
+set nobackup
+set nowritebackup
+
 " Move cursor by display lines when line is wrapped
 nnoremap j gj
 nnoremap k gk
@@ -273,10 +285,10 @@ vnoremap <Up> gk
 inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
 
-" These create newlines like o and O but stay in normal mode
-nmap zj o<Esc>k
-nmap zk O<Esc>j
-
 " Highlight trailing whitespace
 set listchars=tab:\ \ ,trail:·,nbsp:_
 set list
+
+" These create newlines like o and O but stay in normal mode
+nmap zj o<Esc>k
+nmap zk O<Esc>j
