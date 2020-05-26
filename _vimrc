@@ -1,6 +1,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TODO
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autocomplete adds dummy placeholder variables
+" Shift + Backspace inserts "Î"
 " Auto compete window creates miscolored spots
 " Auto java import statements
 " Highlight unused import statements
@@ -18,7 +20,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -33,10 +34,8 @@ call plug#end()
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint', 
-  \ 'coc-json', 
-  \ 'coc-java', 
+  \ 'coc-json',
+  \ 'coc-java',
   \ ]
 
 " TextEdit might fail if hidden is not set.
@@ -65,9 +64,9 @@ inoremap <silent><expr> <TAB> coc#refresh()
 " position. Coc only does snippet and additional edit on confirm.
 if has('patch8.1.1068')
   " Use `complete_info` if your (Neo)Vim version supports it.
-  inoremap <expr> <TAB> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <TAB> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<TAB>"
 else
-  imap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  imap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<C-g>u\<TAB>"
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -85,9 +84,9 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
+	execute 'h '.expand('<cword>')
   else
-    call CocAction('doHover')
+	call CocAction('doHover')
   endif
 endfunction
 
@@ -164,25 +163,8 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Open automatically on startup and in new tabs
-set rtp+=~/.vim/plugged/nerdtree
-autocmd vimenter * NERDTree
-autocmd BufWinEnter * NERDTreeMirror
-
-" Show bookmarks on startup
-let NERDTreeShowBookmarks=1
-
-" Hide "Press ? for help"
-let NERDTreeMinimalUI = 1
-
-" Toggle NERDTree with :tree
-cnoreabbrev tree NERDTreeToggle
-
-" Ignore files
-let NERDTreeIgnore=['\c^ntuser\..*']
+" When coc-pairs completes, enter places cursor in between pairs
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDCommenter
@@ -294,3 +276,7 @@ inoremap <Up> <C-o>gk
 " These create newlines like o and O but stay in normal mode
 nmap zj o<Esc>k
 nmap zk O<Esc>j
+
+" Highlight trailing whitespace
+set listchars=tab:\ \ ,trail:·,nbsp:_
+set list
