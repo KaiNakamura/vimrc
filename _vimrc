@@ -11,6 +11,7 @@
 " Better tabs? Or better tab naming
 " Color Scheme
 " If text is typed between pair before coc-pairs updates, the text remains
+" Comments don't carry on to extra lines
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -38,7 +39,6 @@ let g:coc_global_extensions = [
 	\ 'coc-pairs',
 	\ 'coc-json',
 	\ 'coc-java',
-	\ 'coc-clangd',
 	\ 'coc-tsserver',
 	\ 'coc-python',
 	\ ]
@@ -279,7 +279,7 @@ tnoremap <C-+> <C-w>_
 command T call OpenTerminal()
 func! OpenTerminal()
 	exec ":terminal"
-	exec "normal 10\<C-w>_"
+	exec "normal 5\<C-w>_"
 endfunc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
